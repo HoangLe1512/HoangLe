@@ -1,0 +1,21 @@
+.header{
+    width: 100%;
+    height: 200px;
+    background-image: url("../img/banner_car.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+img {
+    width: 100%;
+    object-fit: cover;
+    height: 300px;
+}
+
+table,
+th,
+td {
+    background-color: rgb(178, 175, 175);
+    border: 1px solid #f8f8f8;
+    border-collapse: collapse;
+}

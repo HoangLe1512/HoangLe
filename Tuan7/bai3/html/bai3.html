@@ -1,0 +1,144 @@
+<!Doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Đăng ký</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <table class="table table-bordered table-success text-primary">
+            <thead>
+                <tr>
+                    <td colspan="3" class="text-center"> Register Form</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="text-align: end;"> Họ và tên<span>(*)</span></td>
+                    <td colspan="2"><input class="col-8" type="text" id="txthoten"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: end;">Tên Đăng Nhập<span>(*)</span></td>
+                    <td colspan="2"><input class="col-8" type="text" id="txttendn"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: end;">Mật khẩu<span>(*)</span></td>
+                    <td colspan="2"><input class="col-8" type="password" id="txtmk"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: end;">Xác Nhận Mật khẩu<span>(*)</span></td>
+                    <td colspan="2"><input class="col-8" type="password" id="txtxnmk"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: end;">Ngày sinh<span>(*)</span></td>
+                    <td colspan="2">
+                        <input type="date" id="txtngaysinh">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: end;">Điện thoại</td>
+                    <td colspan="2"><input class="col-8" type="text" id="txtdt"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: end;">Địa chỉ</td>
+                    <td colspan="2"><input class="col-8" type="text" id="txtdc"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: end;">Email Khác</td>
+                    <td colspan="2"><input class="col-8" type="email" id="txtemail"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: end;">Sở thích</td>
+                    <td colspan="2">
+                        <select id="txtsothich" class="col-8">
+                            <option value="Bóng đá">Bóng đá</option>
+                            <option value="Bóng chuyền">Bóng chuyền</option>
+                            <option value="Bóng rổ">Bóng rổ</option>
+                            <option value="Bóng bàn">Bóng bàn</option>
+                            <option value="Cầu lông">Cầu lông</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="2">
+                        <button type="button" class="btn btn-secondary" id="dk">Đăng ký</button>
+                        <button type="button" class="btn btn-secondary" id="huy">Hủy</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.getElementById('dk').addEventListener('click', function () {
+            var hoten = document.getElementById('txthoten').value;
+            var dn = document.getElementById('txttendn').value;
+            var mk = document.getElementById('txtmk').value;
+            var xnmk = document.getElementById('txtxnmk').value;
+            var ngaysinh = document.getElementById('txtngaysinh').value;
+            var dt = document.getElementById('txtdt').value;
+            var dc = document.getElementById('txtdc').value;
+            var email = document.getElementById('txtemail').value;
+            var sothichduocchon = document.getElementById('txtsothich');
+            var sothich = sothichduocchon.options[sothichduocchon.selectedIndex].value;
+            if (!hoten || !dn || !mk || !xnmk || !ngaysinh || !email) {
+                alert("Vui lòng điền vào tất cả các trường bắt buộc (*)");
+                return;
+            }
+            if (dn.length < 6) {
+                alert("Tên đăng nhập phải có ít nhất 6 ký tự");
+                document.getElementById('txtdn').focus();
+                return;
+            }
+            if (mk !== xnmk || mk.length < 6) {
+                alert("Mật khẩu rỗng hoặc mật khẩu không khớp");
+                document.getElementById('txtmk').focus();
+                return;
+            }
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert("Email không hợp lệ");
+                document.getElementById('txtemail').focus();
+                return;
+            }
+
+            if (isNaN(dt)) {
+                alert("Số điện thoại phải là số");
+                document.getElementById('txtdt').focus();
+                return;
+            }
+
+            localStorage.setItem("hoten", hoten);
+            localStorage.setItem("dn", dn);
+            localStorage.setItem("ngaysinh", ngaysinh);
+            localStorage.setItem("dt", dt);
+            localStorage.setItem("dc", dc);
+            localStorage.setItem("email", email);
+            localStorage.setItem("sothich", sothich);
+            let w = window.open("bai3luudulieu.html");
+        });
+
+        document.getElementById('huy').addEventListener('click', function () {
+            document.getElementById('txthoten').value = '';
+            document.getElementById('txttendn').value = '';
+            document.getElementById('txtmk').value = '';
+            document.getElementById('txtxnmk').value = '';
+            document.getElementById('txtngaysinh').value = '';
+            document.getElementById('txtdt').value = '';
+            document.getElementById('txtdc').value = '';
+            document.getElementById('txtemail').value = '';
+            document.getElementById('txtsothich').selectedIndex = 0;
+        });
+    </script>
+</body>
+
+</html>

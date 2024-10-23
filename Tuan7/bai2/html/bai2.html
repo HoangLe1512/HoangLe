@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../css/bai2.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="container header">
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <table style="width: 100%; color: blue;">
+                    <tr>
+                        <th colspan="2" class="text-center">Bảng tin thị trường</th>
+                    </tr>
+                    <tr>
+                        <th colspan="2" class="text-center">Vàng</th>
+                    </tr>
+                    <tr>
+                        <td class="text-center">Mua vào</td>
+                        <td class="text-center">Bán ra</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 14px" class="text-center vangmua"></td>
+                        <td class="text-center vangban"></td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" class="text-center">USD</th>
+                    </tr>
+                    <tr>
+                        <td class="text-center">Mua vào</td>
+                        <td class="text-center">Bán ra</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 14px" class="text-center usdmua"></td>
+                        <td class="text-center usdban"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-4">
+                <form action="">
+                    <table style="width: 100%">
+                        <tr>
+                            <th colspan="2" class="text-center">Cập nhật giá cả thị trường</th>
+                        </tr>
+                        <tr>
+                            <td>Mua vào</td>
+                            <td><input id="txtmua" type="text" /><span class="ermua" style="color: red;">(*)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Bán ra</td>
+                            <td><input type="text" id="txtban" /><span class="erban" style="color: red;">(*)</span></td>
+                        </tr>
+                        <tr>
+                            <td>Loại xe</td>
+                            <td>
+                                <select name="xe" id="xe">
+                                    <option value="../img/xe1.jpg;35000">Toyota</option>
+                                    <option value="../img/xe2.jpg;70000">Lamborghini</option>
+                                    <option value="../img/xe3.jpg;15000">Kia</option>
+                                    <option value="../img/xe4.jpg;50000">Ferrari</option>
+                                    <option value="../img/xe5.jpg;80000">BMW</option>
+                                    <option value="../img/xe6.jpg;40000">Ford</option>
+                                    <option value="../img/xe7.jpg;32000">Civic</option>
+                                    <option value="../img/xe8.jpg;45000">Mercedes</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input name="btnradio" value="1" type="radio" />
+                                <label for="Vang">Vàng</label>
+                                <input name="btnradio" value="0" type="radio" />
+                                <label for="USD">USD</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="button" value="Update" id="btnupdate">
+                                <input type="button" value="State" id="btnstate">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="col-4">
+                <table style="width: 100%">
+                    <tr>
+                        <th colspan="2" class="text-center">Bảng báo giá</th>
+                    </tr>
+                    <tr>
+                        <td style="color: blue;" colspan="2">
+                            <p>- với kiểu dáng thể thao sang trọng</p>
+                            <p>- nổi bật,ít tốn nhiên liệu</p>
+                            <p>- kiểu dáng thể thao</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <img class="customImg" src="../img/xe1.jpg" alt="" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: blue;" colspan="2">
+                            <p class="money">350000 USD</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#txtmua").focus();
+            $("#btnupdate").attr("disabled", true);
+            $("#btnstate").attr("disabled", true);
+
+            function ktra(giatri, loi) {
+                let reg = /^[0-9]+$/;
+
+                if (!reg.test(giatri)) // thông báo lỗi
+                {
+                    $(loi).html("Nhập số!");
+                    return false;
+
+                } else {
+                    $(loi).html("*");
+                    return true;
+                }
+
+
+
+            }
+
+            $("#txtmua").blur(function (e) {
+                let giamua = $("#txtmua").val();
+                ktra(giamua, ".ermua");
+
+            });
+            $("#txtban").blur(function (e) {
+                let giaban = $("#txtban").val();
+                ktra(giaban, ".erban");
+
+                if (ktra(giaban, ".erban"))
+                    $("#btnupdate").attr("disabled", false);
+                else
+                    $("#btnupdate").attr("disabled", true);
+
+
+            });
+
+            $("#xe").change(function (e) {
+                let xegia = $(this).val();
+                let vt = xegia.indexOf(";")
+
+                let pathxe = xegia.substring(0, vt);
+                let gia = xegia.substring(vt + 1, xegia.length);
+
+                $(".customImg").attr("src", pathxe);
+                $(".money").html(gia);
+
+            });
+
+            $("#btnupdate").click(function (e) {
+                let giamua = $("#txtmua").val();
+                let giaban = $("#txtban").val();
+                //radio? vang usd 
+                let valrad = $("input[name='btnradio']:checked").val();
+                //console.log(valrad);
+                if (valrad == "1") //vang
+                {
+                    $(".vangmua").html(giamua);
+                    $(".vangban").html(giaban);
+                } else {
+                    $(".usdmua").html(giamua);
+                    $(".usdban").html(giaban);
+                }
+
+
+
+            });
+
+        });
+
+        window.onload = function () {
+            var inputNumber = document.getElementById("inputNumber");
+            if (inputNumber) {
+                inputNumber.focus();
+            }
+        };
+    </script>
+
+</body>
+
+</html>
