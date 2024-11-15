@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán</title>
+    <link rel="stylesheet" href="./asset/fonts/fontawesome-free-5.15.1-web/css/all.css">
+    <link rel="stylesheet" href="./asset/css/base.css">
+    <link rel="stylesheet" href="./asset/css/header-nav.css">
+    <link rel="stylesheet" href="./asset/css/index.css">
+    <link rel="stylesheet" href="./asset/css/auth_cart.css">
+    <style>
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 0 20px;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+        
+        .footer-section h3 {
+            color: #ff00009b;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-section ul li i {
+            color: #ff00009b;
+            width: 20px;
+        }
+        
+        .footer-section a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: #ff00009b;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .social-links a {
+            background: #ff00009b;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+        
+        .payment-methods {
+            margin-top: 20px;
+        }
+        
+        .payment-methods i {
+            font-size: 24px;
+            margin: 5px;
+            color: #fff;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #555;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-section {
+                text-align: center;
+            }
+            
+            .footer-section ul li {
+                justify-content: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+        </style>
+</head>
+
+<body>
+    <section class="page">
+        <header class="header">
+            <section class="grid">
+                <section class="header-wrap">
+                    <!-- Logo -->
+                    <section class="header__logo">
+                        <a href="index.html "><img src="asset/img/LOGOmenucopy.png" alt="" style="width: 160px;"></a>
+                    </section>
+                    <!-- Search bar -->
+                    <section class="header__search">
+                        <section class="search-wrap">
+                            <input type="text" class="search-input" id="searchProduct" placeholder="Tìm kiếm mẫu xe bạn yêu thích:">
+                            <button class="search-btn" onclick="searchProduct()">
+                                <i class="search-btn-icon fas fa-search"></i>
+                            </button>
+                        </section>
+                    </section>
+
+                    <!-- Cart -->
+                    <section class="header__cart">
+                        <section class="cart-wrap menu-item-active">
+                            <a href="auth_cart.html" class="cart-link">
+                                <i class="cart-icon fas fa-shopping-cart"></i>
+                                <small class="cart-notice">0</small>
+                            </a>
+                        </section>
+                    </section>
+                    <label for="menu-checkbox" class="show-menu-btn">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </label>
+                </section>
+            </section>
+        </header>
+
+        <nav class="navbar">
+            <input type="checkbox" name="" id="menu-checkbox">
+            <ul class="navbar__menu">
+                <li class="menu-item">
+                    <a href="index.html" class="menu-item-link">Trang chủ</a>
+                </li>
+                <li class="menu-item item-drop">
+                    <a href="#" class="menu-item-link">Sản phẩm</a>
+                    <ul class="menu-drop">
+                        <li class="menu-drop-item">
+                            <a href="Loaixe.html?type=mazda" id="MAZDA">
+                                <img src="asset/img/mdlogo.webp" alt="Mazda" class="brand-logo">
+                                XE MAZDA
+                            </a>
+                            
+                        </li>
+                        <li class="menu-drop-item">
+                            <a href="Loaixe.html?type=mercedes" id="BENZ">
+                                <img src="asset/img/mclogo.webp" alt="Mercedes" class="brand-logo">
+                                XE MERCEDES-BENZ
+                            </a>
+                            
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-item" id="btnProfile">
+                    <a href="gioithieu.html" class="menu-item-link">Giới thiệu</a>
+                <li class="menu-item">
+                    <a href="lienhe.html" class="menu-item-link">Liên hệ</a>
+                </li>
+                <li class="menu-item" id="btnDangnhap">
+                    <a href="auth_form.html" class="menu-item-link">Đăng nhập</a>
+                </li>
+                <li class="menu-item" id="btnLogout" onclick="logout()" style="display: none;">
+                    <a href="index.html" class="menu-item-link">Đăng xuất</a>
+                </li>
+                <label for="menu-checkbox" class="hide-menu-btn">
+                    <i class="fas fa-times"></i>
+                </label>
+            </ul>
+        </nav>
+
+        <div class="content-body">
+            <h2>Thông tin thanh toán</h2>
+            <form id="payment-form" onsubmit="return handlePayment(event)">
+                <div class="form-group">
+                    <label for="fullname">Họ tên:</label>
+                    <input type="text" id="fullname" name="fullname" required placeholder="Nhập họ tên của bạn">
+                </div>
+                <div class="form-group">
+                    <label for="address">Địa chỉ giao hàng:</label>
+                    <input type="text" id="address" name="address" required placeholder="Nhập địa chỉ giao hàng">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Điện thoại:</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="Nhập số điện thoại">
+                </div>
+                <button type="submit" class="submit-btn">Xác nhận thanh toán</button>
+            </form>
+        </div>
+        
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <!-- Thông tin công ty -->
+            <div class="footer-section">
+                <h3>GARA AUTO CAR</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> 109 Phạm Văn Chiêu, Gò Vấp, TP.HCM</li>
+                    <li><i class="fas fa-phone"></i> 0354688170</li>
+                    <li><i class="fas fa-envelope"></i> AUTOCAR@gmail.com</li>
+                    <li><i class="fas fa-clock"></i> Giờ làm việc: 8:00 - 20:00</li>
+                </ul>
+            </div>
+
+            <!-- Liên kết nhanh -->
+            <div class="footer-section">
+                <h3>LIÊN KẾT NHANH</h3>
+                <ul class="quick-links">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Trang chủ</a></li>
+                    <li><a href="Loaixe.html"><i class="fas fa-car"></i> Sản phẩm</a></li>
+                    <li><a href="gioithieu.html"><i class="fas fa-info-circle"></i> Giới thiệu</a></li>
+                    <li><a href="lienhe.html"><i class="fas fa-envelope"></i> Liên hệ</a></li>
+                </ul>
+            </div>
+
+            <!-- Dịch vụ -->
+            <div class="footer-section">
+                <h3>DỊCH VỤ</h3>
+                <ul class="services">
+                    <li><i class="fas fa-check"></i> Bảo hành chính hãng</li>
+                    <li><i class="fas fa-truck"></i> Giao xe tận nơi</li>
+                    <li><i class="fas fa-tools"></i> Bảo dưỡng định kỳ</li>
+                    <li><i class="fas fa-hand-holding-usd"></i> Tư vấn tài chính</li>
+                </ul>
+            </div>
+
+            <!-- Kết nối -->
+            <div class="footer-section">
+                <h3>KẾT NỐI VỚI CHÚNG TÔI</h3>
+                <div class="social-links">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="Youtube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" title="Zalo"><i class="fas fa-comment"></i></a>
+                </div>
+                <div class="payment-methods">
+                    <h3>THANH TOÁN</h3>
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-jcb"></i>
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 GARA AUTO CAR. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </footer>
+
+    <script src="./asset/js/index_currentuser.js"></script>
+    <script src="./asset/js/index_control.js"></script>
+    <script src="./asset/js/index_loadcart.js"></script>
+    <script>
+        // Hàm xử lý thanh toán
+        function handlePayment(event) {
+            event.preventDefault();
+
+            const fullname = document.getElementById('fullname').value;
+            const address = document.getElementById('address').value;
+            const phone = document.getElementById('phone').value;
+
+            localStorage.setItem('orderInfo', JSON.stringify({
+                fullname,
+                address,
+                phone
+            }));
+
+            window.location.href = 'thank_you.html';
+        }
+
+        // Gọi hàm để cập nhật giá trị tổng tiền
+        window.onload = function() {
+            const totalPrice = localStorage.getItem('totalPrice') || '0 đ'; // Lấy giá trị tổng từ localStorage
+            const total = localStorage.getItem('total') || '0 đ';
+            document.getElementById('totalprice').innerText = totalPrice;
+            document.getElementById('total').innerText = total;
+        };
+    </script>
+</body>
+
+</html>
+
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.page {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    background-color: #ff00009b;
+    color: white;
+    padding: 10px 0;
+}
+
+.header__logo .logo-link {
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+}
+
+.header__search {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 250px;
+}
+
+.search-btn {
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-left: 5px;
+    border-radius: 4px;
+    color: #8509749b;
+}
+
+.navbar {
+    background-color: #333;
+}
+
+.navbar__menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-item {
+    display: inline-block;
+}
+
+.menu-item-link {
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+}
+
+.menu-item-link:hover {
+    background-color: #ff00009b;
+}
+
+.content-body {
+    margin-top: 20px;
+}
+
+.content-body h2 {
+    margin-bottom: 15px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form div {
+    margin-bottom: 10px;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="tel"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+button {
+    background-color:#ff00009b;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #ff00009b;
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 0 20px;
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 0 20px;
+}
+
+.footer-section {
+    margin-bottom: 20px;
+}
+
+.footer-section h3 {
+    color: #ff00009b;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-section ul li i {
+    color: #ff00009b;
+    width: 20px;
+}
+
+.footer-section a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: #ff00009b;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.social-links a {
+    background: #ff00009b;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.social-links a:hover {
+    transform: translateY(-3px);
+}
+
+.payment-methods {
+    margin-top: 20px;
+}
+
+.payment-methods i {
+    font-size: 24px;
+    margin: 5px;
+    color: #fff;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #555;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-section {
+        text-align: center;
+    }
+    
+    .footer-section ul li {
+        justify-content: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+.content-body {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc; /* Add a border around the form */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background for the form */
+}
+
+h2 {
+    margin-bottom: 15px;
+    font-size: 24px; /* Increased font size */
+    text-align: center; /* Center the title */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Spacing between fields */
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    display: block; /* Make label occupy the full width */
+}
+
+input[type="text"],
+input[type="tel"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%; /* Make inputs full width */
+    box-sizing: border-box; /* Include padding and border in width */
+}
+
+.submit-btn {
+    background-color: #ff00009b;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%; /* Make button full width */
+}
+
+.submit-btn:hover {
+    background-color:#ff00009b;
+}
+
+
+.page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+}
+
+.content {
+    flex: 1;  
+}
+</style>
